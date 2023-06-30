@@ -1,0 +1,4 @@
+import React from 'react';
+import { RouterStore } from '../stores';
+export declare const RouterContext: React.Context<RouterStore | undefined>;
+export declare function useRouterStore(): RouterStore;

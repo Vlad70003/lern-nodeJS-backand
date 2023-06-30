@@ -1,0 +1,3 @@
+import { Location } from 'history';
+import { Route, RouterState } from '../stores';
+export declare const createMatchingRouterState: (location: Location, routes: Route[], queryParseOptions?: any) => RouterState | undefined;
