@@ -61,7 +61,6 @@ class AuthController {
         try {
             const token = req.headers.authorization.split(' ')[1];
             const decodeData = jwt.verify(token, secret);
-            // const users = await User.find();
             res.json(decodeData);
         } catch (e) {
             console.log(e)
@@ -75,6 +74,29 @@ class AuthController {
             res.json(users);
         } catch (e) {
 
+        }
+    }
+
+    async deleteUser(req, res) {
+        try {
+            const token = req.headers.authorization.split(' ')[1];
+            const decodeData = jwt.verify(token, secret);
+
+            if (decodeData?.username === req.params.id) {
+                res.status(400).json({message: 'Нельзя удалить себя'});
+            }
+            const person = await User.findOne({username: req.params.id})
+            const isDelete = await User.deleteOne({username: req.params.id});
+
+            if (isDelete.deletedCount == 1) {
+                res.json(person?.username);
+            } else {
+                res.status(400).json({message: 'Ошибка удаления пользователя'});
+            }
+
+        } catch (e) {
+            console.log(e)
+            res.status(400).json({message: 'GetUsers error'});
         }
     }
 }

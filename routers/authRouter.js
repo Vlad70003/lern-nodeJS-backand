@@ -17,5 +17,6 @@ router.post('/login', controller.login)
 router.get('/user', authMiddleware, controller.getUser)
 
 router.get('/users', authMiddleware, controller.getUsers)
+router.delete('/deleteUser/:id', authMiddleware, controller.deleteUser)
 
 module.exports = router;
